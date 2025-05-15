@@ -52,4 +52,3 @@ int main() {
     delete s2;
     return 0;
 }
-```

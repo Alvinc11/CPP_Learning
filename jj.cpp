@@ -14,41 +14,40 @@ class Person{
     cin >> name;
   }
 
-  string getName() const {
-    return name;
-  }
-
   void setAge(){
     cout << "Please enter the age: ";
     cin >> age;
     cin.ignore();
   }
 
+  string getName() const {
+    return name;
+  }
+
   int getAge() const {
     return age;
   }
-
-  virtual string getInfo() const = 0;
-  virtual ~Person() {}
+  virtual string getInfo() = 0;
+  virtual ~Person(){}
 };
 
 class Student : public Person{
   public:
-  string getInfo() const override{
-    return "xxxxx";
+  const string getInfo() override{
+    return "I'm a student.";
   }
 };
 
 class Teacher : public Person{
-  public:
-  string getInfo() const override{
-    return "yyyyyy.";
+  public: 
+  const string getInfo() override{
+    return "I'm a teacher.";
   }
 };
 
-int main(){
+int main() {
   vector<unique_ptr<Person>> person;
-  for(int i = 0; i < 2; i++){
+  for (int i = 0; i < 2;i++){
     auto student = make_unique<Student>();
     student->setName();
     student->setAge();
@@ -63,8 +62,7 @@ int main(){
   for(const auto& p : person){
     cout << "Name: " << p->getName() << endl;
     cout << "Age: " << p->getAge() << endl;
-    cout << "Info: " << p->getInfo() << endl;
+    cout << "Info: "<< p->getInfo() << endl;
   }
   return 0;
 }
-
