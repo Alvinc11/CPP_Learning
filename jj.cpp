@@ -1,4 +1,6 @@
 #include<iostream>
+#include<vector>
+#include<memory>
 using namespace std;
 
 class Person{
@@ -7,28 +9,62 @@ class Person{
   int age;
 
   public:
-  Person(string n, int a ) : name(n), age(a) {}
-  virtual string introduce() = 0;
-  string getName() const {return name;}
-  int getAge() const {return age;}
+  void setName(){
+    cout << "Please enter the name: ";
+    cin >> name;
+  }
+
+  string getName() const {
+    return name;
+  }
+
+  void setAge(){
+    cout << "Please enter the age: ";
+    cin >> age;
+    cin.ignore();
+  }
+
+  int getAge() const {
+    return age;
+  }
+
+  virtual string getInfo() const = 0;
   virtual ~Person() {}
 };
 
 class Student : public Person{
-private:
-  string studentID;
-  string course;
-
-public:
-Student(string n, int a, string s, string c) : Person(n, a),studentID(s),course(c){}
-string introduce() override{
-  return "I'm " + getName() + ", " + to_string(getAge()) + " years old. I'm a student. My ID is " + studentID + ", and I'm studying " + course + ".";
-}
+  public:
+  string getInfo() const override{
+    return "xxxxx";
+  }
 };
 
-int main() {
-Person* p = new Student("Sam", 21, "D1124", "Chemistry");
-cout << p->introduce() << endl;
-delete p;
-return 0;
+class Teacher : public Person{
+  public:
+  string getInfo() const override{
+    return "yyyyyy.";
+  }
+};
+
+int main(){
+  vector<unique_ptr<Person>> person;
+  for(int i = 0; i < 2; i++){
+    auto student = make_unique<Student>();
+    student->setName();
+    student->setAge();
+    person.push_back(move(student));
+  }
+
+  auto teacher = make_unique<Teacher>();
+  teacher->setName();
+  teacher->setAge();
+  person.push_back(move(teacher));
+
+  for(const auto& p : person){
+    cout << "Name: " << p->getName() << endl;
+    cout << "Age: " << p->getAge() << endl;
+    cout << "Info: " << p->getInfo() << endl;
+  }
+  return 0;
 }
+
