@@ -1,3 +1,10 @@
+// This program allows the user to:
+// 1. Enter multiple students' names and scores into a map<string, int>
+// 2. Enter 'done' to stop input
+// 3. Search for a student's score by name using map.find()
+// 4. Calculate and display the average score (with 1 decimal place)
+// 5. Print all students and their scores
+// Note: static_cast<double>(sum) is used to avoid integer division truncation
 #include<iostream>
 #include<map>
 #include<iomanip>
