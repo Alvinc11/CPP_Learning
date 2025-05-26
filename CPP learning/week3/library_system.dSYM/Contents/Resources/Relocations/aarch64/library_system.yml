@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/alvinc/Documents/Cpp-Project/CPP learning/week3/library_system'
+relocations:     []
+...
